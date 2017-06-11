@@ -49,6 +49,17 @@ def printData(data):
 		print 'len(data) < 19, aborting'
 		return
 
+	checkSum = 0
+	for i in range(0, 17):
+		checkSum += data[i]
+	checkSum = checkSum & 255
+
+	if (checkSum == data[18]):
+		print 'Checksum:\tOK'
+	else:
+		print 'Checksum:\tDiffers'
+		print '  Calculated:\t%0.2X' % checkSum
+
 	switch = data[5] & 0b1
 	#hexData = '%0.2X' % data[5]
 	#print hexData

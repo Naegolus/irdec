@@ -70,7 +70,7 @@ def processLine(line):
 		#print cntBit
 
 		if (cntBit >= 8):
-			strHex = '%0.2X' % int(strByte, 2)
+			strHex = '%0.2X' % int(strByte[::-1], 2)
 			sys.stdout.write(strHex)
 			#sys.stdout.write('_')
 			strByte = ''

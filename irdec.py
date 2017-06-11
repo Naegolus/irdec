@@ -16,19 +16,39 @@ parser.add_argument('-t', '--detection-threshold', default = 300, help = 'Detect
 parser.add_argument('-s', '--bit-swap', choices = [0, 1], default = 1, help = 'Set bit swapping true or false')
 args = parser.parse_args()
 
+def getFrameStart(data):
+	global doFSM
+
+	[sigType, sigLen] = data
+
+	print "Frame start:"
+	print sigType
+	print sigLen
+
+	doFSM = getDataBit
+
+def getDataBit(data):
+	global doFSM
+
+	[sigType, sigLen] = data
+
+	print "Data bit:"
+	print sigType
+	print sigLen
+
 first = True
+doFSM = getFrameStart
 
 def processLine(line):
 	global first
 
-	[sigType, sigLen] = line.split()
+	data = line.split()
 
 	if first:
 		first = False
 		return
 
-	print sigType
-	print sigLen
+	doFSM(data)
 
 k = 0
 try:

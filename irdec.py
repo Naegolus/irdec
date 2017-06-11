@@ -45,13 +45,13 @@ def getTokenType(sigLen):
 def printData(data):
 	#print data
 
-	switch = data[13] & 0b1
+	switch = data[5] & 0b1
 	if (switch):
 		print 'Power: ON'
 	else:
 		print 'Power: OFF'
 
-	mode = data[13] >> 4
+	mode = data[5] >> 4
 	if (mode == 0):
 		print 'Mode: AUTO'
 	elif (mode == 2):
@@ -65,7 +65,7 @@ def printData(data):
 	else:
 		print 'Mode: <unknown>'
 
-	temp = data[14] >> 1
+	temp = data[6] >> 1
 	print 'Temperature: %d°C' % temp
 
 def processLine(line):
@@ -84,9 +84,9 @@ def processLine(line):
 			print ''
 			cntByte = 0
 			printData(data)
-			data = []
 		elif (tokenType == 1):
 			sys.stdout.write('  ')
+			data = []
 			cntByte = 0
 		elif (tokenType == 3):
 			strByte += '1'

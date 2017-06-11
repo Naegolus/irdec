@@ -67,7 +67,7 @@ def printData(data):
 	else:
 		print 'Mode: <unknown>'
 
-	temp = data[6] >> 1
+	temp = data[6] >> 1 # = Byte 7
 	print 'Temperature: %d°C' % temp
 
 def processLine(line):

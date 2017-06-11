@@ -4,7 +4,7 @@
 import sys, os
 import argparse
 
-parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter, description = 'Input: $ mode2 -d /dev/lirc0')
+parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter, description = 'Panasonic R401A infrared communication decoder. Input: $ mode2 -d /dev/lirc0')
 #parser.add_argument('--hdr-mark', default = 3500, help = 'Header mark')
 #parser.add_argument('--bit-mark', default = 440, help = 'Bit mark')
 #parser.add_argument('--tail-mark', default = 440, help = 'Tail mark')

@@ -16,15 +16,18 @@ parser.add_argument('-t', '--detection-threshold', default = 300, help = 'Detect
 parser.add_argument('-s', '--bit-swap', choices = [0, 1], default = 1, help = 'Set bit swapping true or false')
 args = parser.parse_args()
 
+def processLine(line):
+	print line.split()
+
 k = 0
 try:
 	while True:
-		data = sys.stdin.readline()
+		line = sys.stdin.readline()
 
-		if not data:
+		if not line:
 			break
 
-		print data
+		processLine(line)
 		k = k + 1
 
 except KeyboardInterrupt:

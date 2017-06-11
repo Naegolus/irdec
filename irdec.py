@@ -46,6 +46,8 @@ def printData(data):
 	#print data
 
 	switch = data[5] & 0b1
+	#hexData = '%0.2X' % data[5]
+	#print hexData
 	if (switch):
 		print 'Power: ON'
 	else:

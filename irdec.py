@@ -42,12 +42,11 @@ doFSM = getFrameStart
 def processLine(line):
 	global first
 
-	data = line.split()
-
 	if first:
 		first = False
 		return
 
+	data = line.split()
 	doFSM(data)
 
 k = 0

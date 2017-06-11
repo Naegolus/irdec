@@ -84,6 +84,21 @@ def printData(data):
 	#else:
 		#print 'Profile: <unknown>'
 
+	fanSpeed = data[8] >> 4
+	if (fanSpeed == 10):
+		print 'Fan Speed: AUTO'
+	elif (fanSpeed == 3):
+		print 'Fan Speed: 1 (Slowest)'
+	elif (fanSpeed == 4):
+		print 'Fan Speed: 2'
+	elif (fanSpeed == 5):
+		print 'Fan Speed: 3'
+	elif (fanSpeed == 6):
+		print 'Fan Speed: 4'
+	elif (fanSpeed == 7):
+		print 'Fan Speed: 5 (Fastest)'
+	else:
+		print 'Fan Speed: <unknown>'
 
 def processLine(line):
 	global strByte, cntBit, cntByte, data

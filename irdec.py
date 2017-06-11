@@ -6,39 +6,44 @@ import argparse
 
 parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter, description = 'Input: $ mode2 -d /dev/lirc0')
 #parser.add_argument('--hdr-mark', default = 3500, help = 'Header mark')
-#parser.add_argument('--hdr-space', default = 1700, help = 'Header space')
 #parser.add_argument('--bit-mark', default = 440, help = 'Bit mark')
-parser.add_argument('--bit-one-space', default = 440, help = 'Bit one space')
-parser.add_argument('--bit-zero-space', default = 1300, help = 'Bit zero space')
 #parser.add_argument('--tail-mark', default = 440, help = 'Tail mark')
-parser.add_argument('--tail-space', default = 12000, help = 'Tail space')
-parser.add_argument('-s', '--bit-swap', choices = [0, 1], default = 1, help = 'Set bit swapping true or false')
+parser.add_argument('--tail-space', default = 9950, help = 'Tail space')
+parser.add_argument('--hdr-space', default = 1700, help = 'Header space')
+parser.add_argument('--bit-one-space', default = 1300, help = 'Bit one space')
+parser.add_argument('--bit-zero-space', default = 440, help = 'Bit zero space')
+#parser.add_argument('-s', '--bit-swap', choices = [0, 1], default = 1, help = 'Set bit swapping true or false')
 args = parser.parse_args()
 
 def createThresholds():
-	global tailToZero, zeroToOne
+	global tailToHdr, hdrToOne, oneToZero
 
-	tailToZero = (args.tail_space + args.bit_zero_space) / 2
-	zeroToOne = (args.bit_zero_space + args.bit_one_space) / 2
+	tailToHdr = (args.tail_space + args.hdr_space) / 2
+	hdrToOne = (args.hdr_space + args.bit_one_space) / 2
+	oneToZero = (args.bit_one_space + args.bit_zero_space) / 2
 
 	#print 'tailToZero: %d' % tailToZero
-	#print 'zeroToOne: %d' % zeroToOne
+	#print 'hdrToOne: %d' % hdrToOne
+	#print 'oneToZero: %d' % oneToZero
 
 def getTokenType(sigLen):
-	global tailToZero, zeroToOne
+	global tailToHdr, hdrToOne, oneToZero
 
 	#print sigLen
 
-	if (sigLen > args.tail_space):
+	if (sigLen > args.tail_space + 3000):
 		return 0 # IDLE
-	elif (sigLen > tailToZero):
+	elif (sigLen > tailToHdr):
 		return 1 # Tail
-	elif (sigLen > zeroToOne):
-		return 2 # Zero
-	else:
+	elif (sigLen > hdrToOne):
+		return 2 # Header
+	elif (sigLen > oneToZero):
 		return 3 # One
+	else:
+		return 4 # Zero
 
 def processLine(line):
+	global strByte, cntBit, cntByte
 
 	if processLine.first:
 		processLine.first = False
@@ -51,20 +56,40 @@ def processLine(line):
 
 		if (tokenType == 0):
 			print ''
+			cntByte = 0
 		elif (tokenType == 1):
 			sys.stdout.write('  ')
-		elif (tokenType == 2):
-			sys.stdout.write('0')
-		else:
-			sys.stdout.write('1')
+			cntByte = 0
+		elif (tokenType == 3):
+			strByte += '1'
+			cntBit += 1
+		elif (tokenType == 4):
+			strByte += '0'
+			cntBit += 1
+
+		#print cntBit
+
+		if (cntBit >= 8):
+			strHex = '%0.2X' % int(strByte, 2)
+			sys.stdout.write(strHex)
+			#sys.stdout.write('_')
+			strByte = ''
+			cntBit = 0
+			cntByte += 1
+
+			if (cntByte == 8):
+				sys.stdout.write(' ')
 
 processLine.first = True
 
 # Init
 createThresholds()
+k = 0
+strByte = ''
+cntBit = 0
+cntByte = 0
 
 # Processing
-k = 0
 try:
 	while True:
 		line = sys.stdin.readline()

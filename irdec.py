@@ -42,8 +42,34 @@ def getTokenType(sigLen):
 	else:
 		return 4 # Zero
 
+def printData(data):
+	#print data
+
+	switch = data[13] & 0b1
+	if (switch):
+		print 'Power: ON'
+	else:
+		print 'Power: OFF'
+
+	mode = data[13] >> 4
+	if (mode == 0):
+		print 'Mode: AUTO'
+	elif (mode == 2):
+		print 'Mode: DRY'
+	elif (mode == 3):
+		print 'Mode: COOL'
+	elif (mode == 4):
+		print 'Mode: HEAT'
+	elif (mode == 6):
+		print 'Mode: FAN'
+	else:
+		print 'Mode: <unknown>'
+
+	temp = data[14] >> 1
+	print 'Temperature: %d°C' % temp
+
 def processLine(line):
-	global strByte, cntBit, cntByte
+	global strByte, cntBit, cntByte, data
 
 	if processLine.first:
 		processLine.first = False
@@ -57,6 +83,8 @@ def processLine(line):
 		if (tokenType == 0):
 			print ''
 			cntByte = 0
+			printData(data)
+			data = []
 		elif (tokenType == 1):
 			sys.stdout.write('  ')
 			cntByte = 0
@@ -70,8 +98,10 @@ def processLine(line):
 		#print cntBit
 
 		if (cntBit >= 8):
-			strHex = '%0.2X' % int(strByte[::-1], 2)
-			sys.stdout.write(strHex)
+			byte = int(strByte[::-1], 2)
+			data.append(byte)
+			hexByte = '%0.2X' % byte
+			sys.stdout.write(hexByte)
 			#sys.stdout.write('_')
 			strByte = ''
 			cntBit = 0
@@ -86,6 +116,7 @@ processLine.first = True
 createThresholds()
 k = 0
 strByte = ''
+data = []
 cntBit = 0
 cntByte = 0
 

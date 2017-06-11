@@ -4,7 +4,7 @@
 import sys, os
 import argparse
 
-parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter)
+parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter, description = 'Input: $ mode2 -d /dev/lirc0')
 parser.add_argument('--hdr-mark', default = 3500, help = 'Header mark')
 parser.add_argument('--hdr-space', default = 1700, help = 'Header space')
 parser.add_argument('--bit-mark', default = 440, help = 'Bit mark')

@@ -20,6 +20,10 @@ k = 0
 try:
 	while True:
 		data = sys.stdin.readline()
+
+		if not data:
+			break
+
 		print data
 		k = k + 1
 

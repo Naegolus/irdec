@@ -16,8 +16,19 @@ parser.add_argument('-t', '--detection-threshold', default = 300, help = 'Detect
 parser.add_argument('-s', '--bit-swap', choices = [0, 1], default = 1, help = 'Set bit swapping true or false')
 args = parser.parse_args()
 
+first = True
+
 def processLine(line):
-	print line.split()
+	global first
+
+	[sigType, sigLen] = line.split()
+
+	if first:
+		first = False
+		return
+
+	print sigType
+	print sigLen
 
 k = 0
 try:

@@ -107,7 +107,7 @@ def processLine(line):
 			cntBit = 0
 			cntByte += 1
 
-			if (cntByte == 8):
+			if (cntByte % 3 == 0):
 				sys.stdout.write(' ')
 
 processLine.first = True

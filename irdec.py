@@ -84,6 +84,22 @@ def printData(data):
 	#else:
 		#print 'Profile: <unknown>'
 
+	swing = data[8] & 0b1111
+	if (swing == 15):
+		print 'Swing: AUTO'
+	elif (swing == 1):
+		print 'Swing: 1 (Horizontal)'
+	elif (swing == 2):
+		print 'Swing: 2'
+	elif (swing == 3):
+		print 'Swing: 3'
+	elif (swing == 4):
+		print 'Swing: 4'
+	elif (swing == 5):
+		print 'Swing: 5 (Vertical)'
+	else:
+		print 'Swing: <unknown>'
+
 	fanSpeed = data[8] >> 4
 	if (fanSpeed == 10):
 		print 'Fan Speed: AUTO'

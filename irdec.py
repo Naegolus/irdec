@@ -74,6 +74,17 @@ def printData(data):
 	temp = data[6] >> 1 # = Byte 7
 	print 'Temperature: %d°C' % temp
 
+	#profile = data[13]
+	#if (profile == 16):
+		#print 'Profile: NORMAL'
+	#elif (profile == 17):
+		#print 'Profile: BOOST'
+	#elif (profile == 48):
+		#print 'Profile: QUIET'
+	#else:
+		#print 'Profile: <unknown>'
+
+
 def processLine(line):
 	global strByte, cntBit, cntByte, data
 

@@ -45,6 +45,10 @@ def getTokenType(sigLen):
 def printData(data):
 	#print data
 
+	if (len(data) < 19):
+		print 'len(data) < 19, aborting'
+		return
+
 	switch = data[5] & 0b1
 	#hexData = '%0.2X' % data[5]
 	#print hexData

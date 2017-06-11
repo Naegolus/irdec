@@ -27,6 +27,6 @@ except KeyboardInterrupt:
 	sys.stdout.flush()
 	pass
 
-print k
+print "%s lines processed" % (k)
 
 sys.exit(0)

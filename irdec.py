@@ -41,6 +41,8 @@ try:
 		processLine(line)
 		k = k + 1
 
+		#if k == 15: break
+
 except KeyboardInterrupt:
 	sys.stdout.flush()
 	pass

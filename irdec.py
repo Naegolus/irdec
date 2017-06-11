@@ -53,26 +53,26 @@ def printData(data):
 	#hexData = '%0.2X' % data[5]
 	#print hexData
 	if (switch):
-		print 'Power: ON'
+		print 'Power:\t\tON'
 	else:
-		print 'Power: OFF'
+		print 'Power:\t\tOFF'
 
 	mode = data[5] >> 4
 	if (mode == 0):
-		print 'Mode: AUTO'
+		print 'Mode:\t\tAUTO'
 	elif (mode == 2):
-		print 'Mode: DRY'
+		print 'Mode:\t\tDRY'
 	elif (mode == 3):
-		print 'Mode: COOL'
+		print 'Mode:\t\tCOOL'
 	elif (mode == 4):
-		print 'Mode: HEAT'
+		print 'Mode:\t\tHEAT'
 	elif (mode == 6):
-		print 'Mode: FAN'
+		print 'Mode:\t\tFAN'
 	else:
-		print 'Mode: <unknown>'
+		print 'Mode:\t\t<unknown>'
 
 	temp = data[6] >> 1 # = Byte 7
-	print 'Temperature: %d°C' % temp
+	print 'Temperature:\t%d°C' % temp
 
 	#profile = data[13]
 	#if (profile == 16):
@@ -86,35 +86,35 @@ def printData(data):
 
 	swing = data[8] & 0b1111
 	if (swing == 15):
-		print 'Swing: AUTO'
+		print 'Swing:\t\tAUTO'
 	elif (swing == 1):
-		print 'Swing: 1 (Horizontal)'
+		print 'Swing:\t\t1 (Horizontal)'
 	elif (swing == 2):
-		print 'Swing: 2'
+		print 'Swing:\t\t2'
 	elif (swing == 3):
-		print 'Swing: 3'
+		print 'Swing:\t\t3'
 	elif (swing == 4):
-		print 'Swing: 4'
+		print 'Swing:\t\t4'
 	elif (swing == 5):
-		print 'Swing: 5 (Vertical)'
+		print 'Swing:\t\t5 (Vertical)'
 	else:
-		print 'Swing: <unknown>'
+		print 'Swing:\t\t<unknown>'
 
 	fanSpeed = data[8] >> 4
 	if (fanSpeed == 10):
-		print 'Fan Speed: AUTO'
+		print 'Fan Speed:\tAUTO'
 	elif (fanSpeed == 3):
-		print 'Fan Speed: 1 (Slowest)'
+		print 'Fan Speed:\t1 (Slowest)'
 	elif (fanSpeed == 4):
-		print 'Fan Speed: 2'
+		print 'Fan Speed:\t2'
 	elif (fanSpeed == 5):
-		print 'Fan Speed: 3'
+		print 'Fan Speed:\t3'
 	elif (fanSpeed == 6):
-		print 'Fan Speed: 4'
+		print 'Fan Speed:\t4'
 	elif (fanSpeed == 7):
-		print 'Fan Speed: 5 (Fastest)'
+		print 'Fan Speed:\t5 (Fastest)'
 	else:
-		print 'Fan Speed: <unknown>'
+		print 'Fan Speed:\t<unknown>'
 
 def processLine(line):
 	global strByte, cntBit, cntByte, data

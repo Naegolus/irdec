@@ -18,16 +18,15 @@ args = parser.parse_args()
 
 k = 0
 try:
-	buff = ''
 	while True:
-		buff += sys.stdin.read(1)
-		if buff.endswith('\n'):
-			print buff[:-1]
-			buff = ''
-			k = k + 1
+		data = sys.stdin.readline()
+		print data
+		k = k + 1
+
 except KeyboardInterrupt:
 	sys.stdout.flush()
 	pass
+
 print k
 
 sys.exit(0)

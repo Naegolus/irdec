@@ -79,7 +79,10 @@ def processLine(line):
 		#print cntBit
 
 		if (cntBit >= 8):
-			byte = int(strByte[::-1], 2)
+			if (args.bit_swap == '1'):
+				strByte = strByte[::-1]
+
+			byte = int(strByte, 2)
 			frameData.append(byte)
 			hexByte = '%0.2X' % byte
 			sys.stdout.write(hexByte)
@@ -102,7 +105,7 @@ parser.add_argument('-t', '--tail-space', default = 9950, help = 'Tail space')
 parser.add_argument('-r', '--hdr-space', default = 1700, help = 'Header space')
 parser.add_argument('-o', '--bit-one-space', default = 1300, help = 'Bit one space')
 parser.add_argument('-z', '--bit-zero-space', default = 440, help = 'Bit zero space')
-#parser.add_argument('-s', '--bit-swap', choices = [0, 1], default = 1, help = 'Set bit swapping true or false')
+parser.add_argument('-s', '--bit-swap', choices = ['0', '1'], default = 1, help = 'Set bit swapping true or false')
 parser.add_argument('-d', '--decoder', choices = ['R401A'], help = 'Set specific decoder. R401A .. Panasonic R401A inverter')
 args = parser.parse_args()
 

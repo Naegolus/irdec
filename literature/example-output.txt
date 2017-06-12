@@ -1,0 +1,25 @@
+0220E0 040000 0006  0220E0 040039 328074 0B000E E00000 810000 DF
+Header:		OK
+Checksum:	OK
+Power:		ON
+Mode:		COOL
+Temperature:	25°C
+Swing:		4
+Fan Speed:	5 (Fastest)
+0220E0 040000 0006  0220E0 040038 328074 0B000E E00000 810000 DE
+Header:		OK
+Checksum:	OK
+Power:		OFF
+Mode:		COOL
+Temperature:	25°C
+Swing:		4
+Fan Speed:	5 (Fastest)
+0220E0 040000 0006  0220E0 040039 328074 0B000E E00000 810000 DF
+Header:		OK
+Checksum:	OK
+Power:		ON
+Mode:		COOL
+Temperature:	25°C
+Swing:		4
+Fan Speed:	5 (Fastest)
+0220E0 040000 0006  0220E0 040038 328074 0B000E E00000 810000 DE

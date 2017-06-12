@@ -97,7 +97,7 @@ def processLine(line):
 processLine.first = True
 
 # Parse Arguments
-parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter, description = 'Infrared communication decoder. Input: $ mode2 -d /dev/lirc0')
+parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter, description = 'Infrared communication decoder. Usage: $ mode2 -d /dev/lirc0 | python irdec.py')
 #parser.add_argument('--hdr-mark', default = 3500, help = 'Header mark')
 #parser.add_argument('--bit-mark', default = 440, help = 'Bit mark')
 #parser.add_argument('--tail-mark', default = 440, help = 'Tail mark')

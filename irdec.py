@@ -8,9 +8,9 @@ import dec_R401A
 def createThresholds():
 	global tailToHdr, hdrToOne, oneToZero
 
-	tailToHdr = (int(args.tail_space) + int(args.hdr_space)) / 2
-	hdrToOne = (int(args.hdr_space) + int(args.bit_one_space)) / 2
-	oneToZero = (int(args.bit_one_space) + int(args.bit_zero_space)) / 2
+	tailToHdr = (args.tail_space + args.hdr_space) / 2
+	hdrToOne = (args.hdr_space + args.bit_one_space) / 2
+	oneToZero = (args.bit_one_space + args.bit_zero_space) / 2
 
 	#print 'tailToZero: %d' % tailToZero
 	#print 'hdrToOne: %d' % hdrToOne
@@ -21,7 +21,7 @@ def getTokenType(sigLen):
 
 	#print sigLen
 
-	if (sigLen > int(args.tail_space) + 3000):
+	if (sigLen > args.tail_space + 3000):
 		return 0 # IDLE
 	elif (sigLen > tailToHdr):
 		return 1 # Tail
@@ -79,7 +79,7 @@ def processLine(line):
 		#print cntBit
 
 		if (cntBit >= 8):
-			if (args.bit_swap == '1'):
+			if (args.bit_swap == 1):
 				strByte = strByte[::-1]
 
 			byte = int(strByte, 2)
@@ -101,11 +101,11 @@ parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelp
 #parser.add_argument('--hdr-mark', default = 3500, help = 'Header mark')
 #parser.add_argument('--bit-mark', default = 440, help = 'Bit mark')
 #parser.add_argument('--tail-mark', default = 440, help = 'Tail mark')
-parser.add_argument('-t', '--tail-space', default = '15000', help = 'Tail space')
-parser.add_argument('-r', '--hdr-space', default = '1700', help = 'Header space')
-parser.add_argument('-o', '--bit-one-space', default = '1300', help = 'Bit one space')
-parser.add_argument('-z', '--bit-zero-space', default = '400', help = 'Bit zero space')
-parser.add_argument('-s', '--bit-swap', choices = ['0', '1'], default = '1', help = 'Set bit swapping true or false')
+parser.add_argument('-t', '--tail-space', type = int, default = 15000, help = 'Tail space')
+parser.add_argument('-r', '--hdr-space', type = int, default = 1700, help = 'Header space')
+parser.add_argument('-o', '--bit-one-space', type = int, default = 1300, help = 'Bit one space')
+parser.add_argument('-z', '--bit-zero-space', type = int, default = 400, help = 'Bit zero space')
+parser.add_argument('-s', '--bit-swap', type = int, choices = [0, 1], default = 1, help = 'Set bit swapping true or false')
 parser.add_argument('-d', '--decoder', choices = ['R401A'], help = 'Set specific decoder. R401A .. Panasonic R401A inverter')
 args = parser.parse_args()
 

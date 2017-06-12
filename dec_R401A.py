@@ -113,7 +113,10 @@ def decodeR401aFrame(frameId, frameData):
 			else:
 				print 'Fan Speed:\t<unknown>'
 		else:
-			print 'len(frameData) < 19, aborting'
+			print 'Unknown frame, decoding aborted'
+			print '  ID:\t%d' % frameId
+			print '  Data:\t%s' % frameData
+			print '  Len:\t%d' % len(frameData)
 
 	return
 

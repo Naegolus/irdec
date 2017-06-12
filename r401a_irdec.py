@@ -42,12 +42,37 @@ def getTokenType(sigLen):
 	else:
 		return 4 # Zero
 
+def checkHeaderOk(data):
+	global headerOk
+
+	header = [2, 32, 224, 4, 0, 0, 0, 6]
+
+	#print data
+
+	if (len(data) < len(header)):
+		print 'len(data) < len(header)'
+		return False
+
+	for i in range(0, len(header) - 1):
+		if (data[i] != header[i]):
+			print 'data[%d] != header[%d]' % i
+			return False
+
+	return True
+
 def printData(data):
+	global headerOk
+
 	#print data
 
 	if (len(data) < 19):
 		print 'len(data) < 19, aborting'
 		return
+
+	if (headerOk):
+		print 'Header:\t\tOK'
+	else:
+		print 'Header:\t\tNot OK'
 
 	checkSum = 0
 	for i in range(0, 17):
@@ -128,7 +153,7 @@ def printData(data):
 		print 'Fan Speed:\t<unknown>'
 
 def processLine(line):
-	global strByte, cntBit, cntByte, data
+	global strByte, cntBit, cntByte, data, headerOk
 
 	if processLine.first:
 		processLine.first = False
@@ -143,8 +168,10 @@ def processLine(line):
 			print ''
 			cntByte = 0
 			printData(data)
+			data = []
 		elif (tokenType == 1):
 			sys.stdout.write('  ')
+			headerOk = checkHeaderOk(data)
 			data = []
 			cntByte = 0
 		elif (tokenType == 3):
@@ -178,6 +205,7 @@ strByte = ''
 data = []
 cntBit = 0
 cntByte = 0
+headerOk = False
 
 # Processing
 try:

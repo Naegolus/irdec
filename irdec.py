@@ -59,7 +59,7 @@ def processLine(line):
 			cntBit = 0
 			cntByte = 0
 		elif (tokenType == 1):
-			sys.stdout.write('  ')
+			sys.stdout.write(', ')
 
 			decodeFrame(frameId, frameData)
 

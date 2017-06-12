@@ -21,7 +21,7 @@ def getTokenType(sigLen):
 
 	#print sigLen
 
-	if (sigLen > args.tail_space + 3000):
+	if (sigLen > int(args.tail_space) + 3000):
 		return 0 # IDLE
 	elif (sigLen > tailToHdr):
 		return 1 # Tail

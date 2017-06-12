@@ -3,10 +3,8 @@
 
 import sys, os
 
-r401aHeader = [2, 32, 224, 4, 0, 0, 0, 6]
-
 def decodeR401aFrame(frameId, frameData):
-	global r401aHeader
+	r401aHeader = [2, 32, 224, 4, 0, 0, 0, 6]
 
 	#print (frameId, frameData)
 

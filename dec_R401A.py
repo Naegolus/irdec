@@ -43,7 +43,7 @@ def decodeR401aFrame(frameId, frameData):
 			if (checkSum == frameData[18]):
 				print 'Checksum:\tOK'
 			else:
-				print 'Checksum:\tDiffers'
+				print 'Checksum:\tNot OK'
 				print '  Calculated:\t%0.2X' % checkSum
 
 			switch = frameData[5] & 0b1

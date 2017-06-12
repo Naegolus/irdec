@@ -42,20 +42,19 @@ def getTokenType(sigLen):
 	else:
 		return 4 # Zero
 
+constHeader = [2, 32, 224, 4, 0, 0, 0, 6]
 def checkHeaderOk(data):
 	global headerOk
 
-	header = [2, 32, 224, 4, 0, 0, 0, 6]
-
 	#print data
 
-	if (len(data) < len(header)):
-		print 'len(data) < len(header)'
+	if (len(data) < len(constHeader)):
+		#print 'len(data) < len(constHeader)'
 		return False
 
-	for i in range(0, len(header) - 1):
-		if (data[i] != header[i]):
-			print 'data[%d] != header[%d]' % (i, i)
+	for i in range(0, len(constHeader)):
+		if (data[i] != constHeader[i]):
+			#print 'data[%d] != constHeader[%d]' % (i, i)
 			return False
 
 	return True
@@ -73,6 +72,13 @@ def printData(data):
 		print 'Header:\t\tOK'
 	else:
 		print 'Header:\t\tNot OK'
+		sys.stdout.write('  Should be:\t')
+		for i in range(0, len(constHeader)):
+			hexByte = '%0.2X' % constHeader[i]
+			sys.stdout.write(hexByte)
+			if (i == 2 or i == 5):
+				sys.stdout.write(' ')
+		print ''
 
 	checkSum = 0
 	for i in range(0, 17):

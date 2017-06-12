@@ -55,7 +55,7 @@ def checkHeaderOk(data):
 
 	for i in range(0, len(header) - 1):
 		if (data[i] != header[i]):
-			print 'data[%d] != header[%d]' % i
+			print 'data[%d] != header[%d]' % (i, i)
 			return False
 
 	return True

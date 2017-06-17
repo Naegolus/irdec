@@ -38,16 +38,15 @@ def dummyDecodeFrame(frameId, frameData):
 def processLine(line):
 	global strByte, cntBit, cntByte, frameId, frameData
 
-	if processLine.first:
-		processLine.first = False
-		return
-
 	[sigType, sigLen] = line.split()
 
 	if (sigType == 'space'):
 		tokenType = getTokenType(int(sigLen))
 
 		if (tokenType == 0):
+			if (len(frameData) == 0):
+				return
+
 			print ''
 
 			decodeFrame(frameId, frameData)
@@ -93,8 +92,6 @@ def processLine(line):
 
 			if (cntByte % 4 == 0):
 				sys.stdout.write(' ')
-
-processLine.first = True
 
 # Parse Arguments
 parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter, description = 'Infrared communication decoder. Usage: $ mode2 -d /dev/lirc0 | python irdec.py')

@@ -109,10 +109,10 @@ parser.add_argument('-s', '--bit-swap', type = int, choices = [0, 1], default = 
 parser.add_argument('-d', '--decoder', choices = ['R401A'], help = 'Set specific decoder. R401A .. Panasonic R401A inverter')
 args = parser.parse_args()
 
-if (args.decoder == 'R401A'):
-	decodeFrame = dec_R401A.decodeR401aFrame
-else:
-	decodeFrame = dummyDecodeFrame
+decoderList = {
+	'R401A' : dec_R401A.decodeR401aFrame,
+}
+decodeFrame = decoderList.get(args.decoder, dummyDecodeFrame)
 
 # Init
 createThresholds()
